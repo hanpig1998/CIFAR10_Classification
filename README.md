@@ -1,2 +1,2 @@
-# CIFAR10_Classification
+## CIFAR10_Classification
 AI introduction project 2
