@@ -6,6 +6,11 @@ AI introduction project 2
     torch=>0.4.1
     sklearn=>0.19.1
 
+### Model
+<p align="center">
+    <img src="1.png"
+width="300">
+</p>  
 ### Train model
 
     python train.py --output (PATH) --learning_rate --batch_size --epoch
