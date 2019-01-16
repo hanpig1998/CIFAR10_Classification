@@ -15,7 +15,7 @@ class ResidualBlock(nn.Module):
         self.shortcut = nn.Sequential()
         if stride != 1 or inchannel != outchannel:
             self.shortcut = nn.Sequential(
-                    nn.Conv2d(inchannel, outchannel, kernel_size=1, stride=stride, padding=1, bias=False),
+                    nn.Conv2d(inchannel, outchannel, kernel_size=1, stride=stride, bias=False),
                     nn.BatchNorm2d(outchannel)
                     )
     
@@ -39,13 +39,14 @@ class ResNet(nn.Module):
         self.layer2 = self.make_layer(ResidualBlock, 128, 2, stride=2)
         self.layer3 = self.make_layer(ResidualBlock, 256, 2, stride=2)
         self.layer4 = self.make_layer(ResidualBlock, 512, 2, stride=2)
-        self.output_class = nn.linear(512, num_classes)
+        self.output_class = nn.Linear(512, num_classes)
         
     def make_layer(self, block, channels, num_blocks, stride):
         strides = [stride] + [1] * (num_blocks - 1)
         layers = []
         for stride in strides:
             layers.append(block(self.inchannel, channels, stride))
+            self.inchannel = channels
         return nn.Sequential(*layers)
     
     def forward(self, x):
@@ -60,7 +61,8 @@ class ResNet(nn.Module):
         return x
     
 def ResNet18():
-    return Resnet(ResidualBlock)
+
+    return ResNet(ResidualBlock)
         
         
         
