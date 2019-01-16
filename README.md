@@ -11,6 +11,7 @@ AI introduction project 2
     <img src="1.png"
 width="300">
 </p>  
+
 ### Train model
 
     python train.py --output (PATH) --learning_rate --batch_size --epoch
